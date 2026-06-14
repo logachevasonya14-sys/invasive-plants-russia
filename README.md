@@ -1,5 +1,5 @@
 # invasive-plants-russia
-ETL pipeline for invasive plant species distribution analysis in Russia
+ETL пайплайн инвазивных видов растений в РФ
 
 ## Что делает
 - Качает данные о наблюдениях с GBIF API (15 видов, 4000+ записей)
