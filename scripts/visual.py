@@ -1,7 +1,21 @@
+import os
 import pandas as pd
 import folium
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
-engine = create_engine("mysql+pymysql://plantsuser:plantspass123@localhost/invasive_plants")
+from sqlalchemy.engine import URL
+
+load_dotenv()
+
+database_url = URL.create(
+    "mysql+pymysql",
+    username=os.getenv("DB_VISUAL_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+)
+
+engine = create_engine(database_url)
 df = pd.read_sql("SELECT * FROM observations", engine)
 print(f"Загружено {len(df)} записей из базы данных.")
 print(df.groupby("species")["id"].count())
